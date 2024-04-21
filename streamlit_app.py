@@ -47,7 +47,9 @@ def main():
         try:
             translation = translate_text(input_text, model_name, max_length=5000)
             st.success(f"Traducción al {target_lang}:")
-            st.markdown(f"```\n{translation}\n```")
+            translated_paragraphs = translation.split("\n\n")  # Dividir en párrafos
+            for paragraph in translated_paragraphs:
+                st.markdown(f"```\n{paragraph}\n```")
         except ValueError as e:
             st.error(f"Error: {e}")
 
