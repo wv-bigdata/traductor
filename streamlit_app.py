@@ -1,6 +1,5 @@
 import streamlit as st
 from transformers import MarianTokenizer, MarianMTModel
-import pyperclip
 
 @st.cache(allow_output_mutation=True, show_spinner=False)
 def load_model_and_tokenizer_es_en():
@@ -48,9 +47,10 @@ def main():
         try:
             translation = translate_text(input_text, model_name, max_length=5000)
             st.success(f"Traducción al {target_lang}:")
-            st.text_area("Texto Traducido", value=translation, height=200)
+            st.markdown(f"```\n{translation}\n```")
+            st.info("Haz clic en el botón de copiar para copiar el texto traducido.")
             if st.button("Copiar al portapapeles"):
-                pyperclip.copy(translation)
+                st.experimental_set_clipboard(translation)
                 st.info("Texto copiado al portapapeles.")
         except ValueError as e:
             st.error(f"Error: {e}")
