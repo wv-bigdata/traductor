@@ -2,14 +2,19 @@ import streamlit as st
 from transformers import MarianTokenizer, MarianMTModel
 
 @st.cache(allow_output_mutation=True, show_spinner=False)
-def load_model_and_tokenizer(source_lang, target_lang):
-    model_name = f"Helsinki-NLP/opus-mt-{source_lang}-{target_lang}"
-    tokenizer = MarianTokenizer.from_pretrained(model_name)
-    model = MarianMTModel.from_pretrained(model_name)
+def load_model_and_tokenizer_es_en():
+    tokenizer = MarianTokenizer.from_pretrained("Helsinki-NLP/opus-mt-es-en")
+    model = MarianMTModel.from_pretrained("Helsinki-NLP/opus-mt-es-en")
     return tokenizer, model
 
-def translate_text(input_text, source_lang, target_lang, max_length=None):
-    tokenizer, model = load_model_and_tokenizer(source_lang, target_lang)
+@st.cache(allow_output_mutation=True, show_spinner=False)
+def load_model_and_tokenizer_en_es():
+    tokenizer = MarianTokenizer.from_pretrained("Helsinki-NLP/opus-mt-en-es")
+    model = MarianMTModel.from_pretrained("Helsinki-NLP/opus-mt-en-es")
+    return tokenizer, model
+
+def translate_text(input_text, model_name, max_length=None):
+    tokenizer, model = model_name()
 
     tokens = tokenizer.tokenize(tokenizer.decode(tokenizer.encode(input_text)))
     num_tokens = len(tokens)
@@ -33,13 +38,14 @@ def main():
 
     source_lang = st.selectbox("Selecciona el idioma de origen:", ["español", "inglés"])
     target_lang = "inglés" if source_lang == "español" else "español"
+    model_name = load_model_and_tokenizer_es_en if source_lang == "español" else load_model_and_tokenizer_en_es
     
     text = st.text_area(f"Introduce el texto en {source_lang} que quieres traducir:")
     
     if st.button("Traducir"):
         input_text = text.strip("¿¡")  # Eliminar caracteres especiales del principio
         try:
-            translation = translate_text(input_text, source_lang[:2], target_lang[:2], max_length=5000)
+            translation = translate_text(input_text, model_name, max_length=5000)
             st.success(f"Traducción a {target_lang}:")
             st.write(translation)
         except ValueError as e:
