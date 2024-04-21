@@ -46,7 +46,7 @@ def main():
         input_text = text.strip("¿¡")  # Eliminar caracteres especiales del principio
         try:
             translation = translate_text(input_text, model_name, max_length=5000)
-            st.success(f"Traducción a {target_lang}:")
+            st.success(f"Traducción al {target_lang}:")
             st.write(translation)
         except ValueError as e:
             st.error(f"Error: {e}")
