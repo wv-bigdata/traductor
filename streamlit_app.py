@@ -47,7 +47,10 @@ def main():
         try:
             translation = translate_text(input_text, model_name, max_length=5000)
             st.success(f"Traducción al {target_lang}:")
-            st.write(translation)
+            st.text_area("Texto Traducido", value=translation, height=200)
+            st.button("Copiar traducción", key="copy_translation", help="Haz clic para copiar el texto traducido al portapapeles")
+            if st.button("Copiar al portapapeles"):
+                st.experimental_set_query_params(translation=translation)
         except ValueError as e:
             st.error(f"Error: {e}")
 
