@@ -1,7 +1,7 @@
 import streamlit as st
 from transformers import MarianTokenizer, MarianMTModel
 
-@st.cache
+@st.cache(allow_output_mutation=True, show_spinner=False)
 def load_model_and_tokenizer():
     tokenizer = MarianTokenizer.from_pretrained("Helsinki-NLP/opus-mt-es-en")
     model = MarianMTModel.from_pretrained("Helsinki-NLP/opus-mt-es-en")
