@@ -47,12 +47,7 @@ def main():
         try:
             translation = translate_text(input_text, model_name, max_length=5000)
             st.success(f"Traducción al {target_lang}:")
-            max_chars_per_line = 80  # Límite de caracteres por línea
-            start = 0
-            while start < len(translation):
-                end = start + max_chars_per_line
-                st.markdown(f"```\n{translation[start:end]}\n```")
-                start = end
+            st.markdown(f"```markdown\n{translation}\n```", unsafe_allow_html=True)
         except ValueError as e:
             st.error(f"Error: {e}")
 
