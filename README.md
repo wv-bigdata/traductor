@@ -18,3 +18,10 @@
 [Traductor Español - Inglés](https://colab.research.google.com/drive/1NQ91GUjdpBBPwGvehtyOlOBkXGdNnhDp?usp=sharing)
 
 [Traductor Inglés - Español](https://colab.research.google.com/drive/18_A6tcF9gSXOJeAW0qQXi6-M6dolAiAX?usp=sharing)
+
+---
+
+## Aplicación web los modelos de MarianMT.
+
+He creado una aplicación web para traducir texto del Español al Inglés, y del Inglés al Español; utilizando el modelo preentrenado MarianMT, para hacer traducciones más amigablemente.
+Para poder acceder a ella, haz click [aquí.](https://traductor-wv-bigdata.streamlit.app/)
