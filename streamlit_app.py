@@ -34,11 +34,11 @@ def translate_text(input_text, model_name, max_length=None):
         raise ValueError(f"El texto de entrada debe tener un mínimo de 3 palabras y un máximo aproximado de {max_length} palabras.")
 
 def main():
-    st.title("Traductor")
+    st.title("Traductor Español - Inglés / Inglés - Español")
 
-    source_lang = st.selectbox("Selecciona el idioma de origen:", ["español", "inglés"])
-    target_lang = "inglés" if source_lang == "español" else "español"
-    model_name = load_model_and_tokenizer_es_en if source_lang == "español" else load_model_and_tokenizer_en_es
+    source_lang = st.selectbox("Selecciona el idioma de origen:", ["Español", "Inglés"])
+    target_lang = "Inglés" if source_lang == "Español" else "Español"
+    model_name = load_model_and_tokenizer_es_en if source_lang == "Español" else load_model_and_tokenizer_en_es
     
     text = st.text_area(f"Introduce el texto en {source_lang} que quieres traducir:")
     
@@ -53,3 +53,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Pie de página
+st.caption("Traductor de idiomas desarrollado por Wilbert Vong - Big Data Architect.")
