@@ -47,7 +47,7 @@ def main():
         try:
             translation = translate_text(input_text, model_name, max_length=5000)
             st.success(f"Traducción al {target_lang}:")
-            st.text(translation)
+            st.write(translation)
         except ValueError as e:
             st.error(f"Error: {e}")
 
